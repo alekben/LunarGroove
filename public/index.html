@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Lunar Groove Ceramics — handmade ceramic art."
+    />
+    <title>Lunar Groove Ceramics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="stars" aria-hidden="true"></div>
+
+    <header class="header">
+      <nav class="nav">
+        <a class="logo" href="/">Lunar Groove Ceramics</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="gallery" aria-label="Image gallery">
+        <div class="gallery-frame">
+          <img class="gallery-layer" id="gallery-layer-a" src="/images/1.jpg" alt="Gallery image" />
+          <img class="gallery-layer" id="gallery-layer-b" src="/images/1.jpg" alt="" aria-hidden="true" />
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <h2>About</h2>
+        <p>
+          This project is a minimal frontend-only website. All assets are served
+          from Cloudflare Workers at the edge — fast, global, and simple to
+          maintain.
+        </p>
+      </section>
+
+      <section class="section" id="features">
+        <h2>Features</h2>
+        <ul class="feature-grid">
+          <li class="feature-card">
+            <h3>Static &amp; simple</h3>
+            <p>Plain HTML, CSS, and JavaScript — no build step required.</p>
+          </li>
+          <li class="feature-card">
+            <h3>Edge deployed</h3>
+            <p>Runs on Cloudflare Workers for low latency worldwide.</p>
+          </li>
+          <li class="feature-card">
+            <h3>GitHub ready</h3>
+            <p>Push to GitHub and deploy automatically with GitHub Actions.</p>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Built with LunarGroove · Deployed on Cloudflare Workers</p>
+    </footer>
+
+    <script src="/script.js"></script>
+  </body>
+</html>

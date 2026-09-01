@@ -6,6 +6,12 @@ const GALLERY_IMAGES = [
   "/images/5.jpg",
   "/images/6.jpg",
   "/images/7.jpg",
+  "/images/8.jpg",
+  "/images/9.jpg",
+  "/images/10.jpg",
+  "/images/11.jpg",
+  "/images/12.jpg",
+  "/images/13.jpg",
 ];
 
 const FADE_MS = 2000;
@@ -41,45 +47,55 @@ function initGallery() {
     img.src = src;
   });
 
-  function setVisibleLayer(index) {
-    layers.forEach((layer, i) => {
-      layer.classList.toggle("is-visible", i === index);
-      layer.style.transition = "";
-    });
+  function active() {
+    return layers[activeLayer];
+  }
+
+  function inactive() {
+    return layers[1 - activeLayer];
+  }
+
+  function resetLayer(layer, { opacity, zIndex }) {
+    layer.style.transition = "none";
+    layer.style.opacity = String(opacity);
+    layer.style.zIndex = String(zIndex);
   }
 
   function showInitialImage() {
-    layers[activeLayer].src = GALLERY_IMAGES[currentIndex];
-    layers[activeLayer].alt = `Gallery image ${currentIndex + 1}`;
-    layers[1 - activeLayer].alt = "";
-    layers[1 - activeLayer].setAttribute("aria-hidden", "true");
-    layers[activeLayer].removeAttribute("aria-hidden");
-    setVisibleLayer(activeLayer);
+    const visible = active();
+    const hidden = inactive();
+
+    visible.src = GALLERY_IMAGES[currentIndex];
+    visible.alt = `Gallery image ${currentIndex + 1}`;
+    hidden.alt = "";
+    hidden.setAttribute("aria-hidden", "true");
+    visible.removeAttribute("aria-hidden");
+
+    resetLayer(visible, { opacity: 1, zIndex: 2 });
+    resetLayer(hidden, { opacity: 0, zIndex: 1 });
   }
 
   function transitionToNext() {
     const nextIndex = pickRandomIndex(currentIndex);
-    const current = layers[activeLayer];
-    const incoming = layers[1 - activeLayer];
+    const current = active();
+    const incoming = inactive();
 
     incoming.src = GALLERY_IMAGES[nextIndex];
     incoming.alt = `Gallery image ${nextIndex + 1}`;
     incoming.removeAttribute("aria-hidden");
     current.setAttribute("aria-hidden", "true");
 
-    incoming.classList.remove("is-visible");
-    incoming.style.transition = "none";
+    resetLayer(incoming, { opacity: 0, zIndex: 2 });
+    resetLayer(current, { opacity: 1, zIndex: 1 });
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        incoming.style.transition = `opacity ${FADE_MS}ms ease-in-out`;
-        incoming.classList.add("is-visible");
-      });
-    });
+    // Force the browser to apply opacity 0 before starting the fade.
+    void incoming.offsetHeight;
+
+    incoming.style.transition = `opacity ${FADE_MS}ms ease-in-out`;
+    incoming.style.opacity = "1";
 
     window.setTimeout(() => {
-      current.classList.remove("is-visible");
-      current.style.transition = "";
+      resetLayer(current, { opacity: 0, zIndex: 1 });
       activeLayer = 1 - activeLayer;
       currentIndex = nextIndex;
     }, FADE_MS);

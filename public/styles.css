@@ -34,6 +34,7 @@ body {
   background: var(--cream);
   line-height: 1.6;
   min-height: 100vh;
+  min-height: 100dvh; /* excludes mobile browser toolbars */
   display: flex;
   flex-direction: column;
 }
@@ -64,6 +65,7 @@ body {
   font-size: 0.95rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  white-space: nowrap;
   padding: 0.4rem 0;
   border-bottom: 2px solid transparent;
   transition: border-color 0.2s ease, color 0.2s ease;
@@ -85,6 +87,16 @@ body {
   }
 }
 
+@media (max-width: 360px) {
+  .nav ul {
+    gap: 0.9rem;
+  }
+  .nav a {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+  }
+}
+
 /* ---------- Landing page ---------- */
 .landing {
   flex: 1;
@@ -94,8 +106,13 @@ body {
   justify-content: space-between;
   /* Solid tan; the logo's cream backdrop multiplies into it seamlessly */
   background: var(--tan);
-  padding: 2rem 16px 2.5rem;
-  min-height: calc(100vh - var(--nav-height));
+  padding: 2rem 16px max(2.5rem, env(safe-area-inset-bottom));
+  /* Exactly one screen tall so the icons are always in view.
+     dvh tracks the visible area on mobile (toolbars excluded);
+     on desktop it equals vh. */
+  height: calc(100vh - var(--nav-height));
+  height: calc(100dvh - var(--nav-height));
+  min-height: 320px;
 }
 
 .landing-logo {
@@ -104,6 +121,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
+  min-height: 0; /* let the logo shrink to fit short screens */
   background: var(--tan); /* backdrop for the logo's multiply blend */
   opacity: 0;
   animation: logo-fade-in 3s ease-in-out forwards;
@@ -112,6 +130,8 @@ body {
 .landing-logo img {
   width: min(90vw, 760px);
   height: auto;
+  max-height: 100%;
+  object-fit: contain;
   /* Blend the logo's cream backdrop into the page */
   mix-blend-mode: multiply;
 }

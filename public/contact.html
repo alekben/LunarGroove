@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lunar Groove Ceramics — handmade ceramic art." />
+    <title>Contact Us — Lunar Groove Ceramics</title>
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/gallery">Gallery</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/contact" aria-current="page">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <main class="page">
+      <div class="page-inner">
+        <h1>Contact Us</h1>
+        <form class="contact-form" novalidate>
+          <label>Name<input type="text" name="name" autocomplete="name" required /></label>
+          <label>Email Address<input type="email" name="email" autocomplete="email" required /></label>
+          <label>Phone Number<input type="tel" name="phone" autocomplete="tel" /></label>
+          <label>Message<textarea name="message" required></textarea></label>
+          <button type="submit">Send Message</button>
+          <p class="form-status" role="status"></p>
+        </form>
+      </div>
+    </main>
+
+    <script src="/script.js"></script>
+  </body>
+</html>

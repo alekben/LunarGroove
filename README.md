@@ -23,15 +23,9 @@ You need the [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
 npx wrangler login
 ```
 
-## Deploy via GitHub Actions
+## Automatic deploys
 
-1. Push this repo to GitHub.
-2. In the Cloudflare dashboard, create an [API token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) with **Workers Scripts: Edit** permission.
-3. Find your [Account ID](https://developers.cloudflare.com/fundamentals/account/find-account-and-zone-ids/) in the Cloudflare dashboard.
-4. In your GitHub repo, add these secrets under **Settings → Secrets and variables → Actions**:
-   - `CLOUDFLARE_API_TOKEN`
-   - `CLOUDFLARE_ACCOUNT_ID`
-5. Push to the `main` branch — the workflow in `.github/workflows/deploy.yml` deploys automatically.
+The Worker is connected to this GitHub repo through Cloudflare's Git integration (Workers Builds). Every push to `main` is built and deployed by Cloudflare; no GitHub Actions workflow or repo secrets are needed.
 
 After deployment, your site is available at:
 
